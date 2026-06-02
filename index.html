@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Путиловский Дмитрий Александрович — клинический психолог</title>
+  <meta name="description" content="Клинический психолог Дмитрий Путиловский. Работа с зависимыми формами поведения, психотравмой, тревогой, самооценкой и отношениями. Очно и онлайн." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f5f1ea;
+      --card: #fbf8f2;
+      --text: #23211f;
+      --muted: #746b62;
+      --line: #ded3c6;
+      --accent: #8d6248;
+      --accent-dark: #5b3d2c;
+      --soft: #ebe2d7;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(245, 241, 234, 0.86);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(222, 211, 198, .7);
+    }
+    .nav {
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      letter-spacing: .02em;
+    }
+    .menu { display: flex; align-items: center; gap: 26px; color: var(--muted); font-size: 14px; }
+    .menu a:hover { color: var(--text); }
+    .menu-toggle { position: absolute; opacity: 0; pointer-events: none; }
+    .burger {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      position: relative;
+      z-index: 70;
+      align-items: center;
+      justify-content: center;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .burger span,
+    .burger::before,
+    .burger::after {
+      content: "";
+      display: block;
+      width: 30px;
+      height: 3px;
+      border-radius: 99px;
+      background: var(--accent-dark);
+      position: absolute;
+      transition: .25s ease;
+    }
+    .burger::before { transform: translateY(-9px); }
+    .burger::after { transform: translateY(9px); }
+    #menu-toggle:checked + .container .burger span { opacity: 0; }
+    #menu-toggle:checked + .container .burger::before { transform: rotate(45deg); }
+    #menu-toggle:checked + .container .burger::after { transform: rotate(-45deg); }
+    .mobile-panel {
+      position: static;
+      z-index: 50;
+      background: rgba(251, 248, 242, .98);
+      display: none;
+      padding: 24px 20px 28px;
+      text-align: center;
+      border-top: 1px solid var(--line);
+      box-shadow: 0 18px 35px rgba(60, 45, 35, .08);
+    }
+    #menu-toggle:checked ~ .mobile-panel { display: block; }
+    .mobile-panel a {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--accent-dark);
+      padding: 10px 0;
+    }
+    .mobile-panel .mobile-record {
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      margin: 16px auto 0;
+      max-width: 240px;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 20px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: #fff;
+      border-radius: 999px;
+      padding: 14px 24px;
+      font-weight: 500;
+      transition: .25s ease;
+    }
+    .btn:hover { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn.light { background: transparent; color: var(--accent-dark); }
+    .btn.light:hover { background: var(--soft); }
+
+    .hero { padding: 72px 0 54px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 22px;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 7vw, 86px);
+      line-height: .95;
+      font-weight: 600;
+      letter-spacing: -.03em;
+      margin-bottom: 28px;
+    }
+    .lead { font-size: 19px; color: var(--muted); max-width: 560px; margin-bottom: 34px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 36px; }
+    .tags { display: grid; gap: 12px; max-width: 570px; }
+    .tag {
+      background: rgba(251,248,242,.75);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px 18px;
+      color: var(--accent-dark);
+      font-weight: 500;
+    }
+    .hero-photo {
+      position: relative;
+      border-radius: 34px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 70px rgba(60, 45, 35, .13);
+    }
+    .hero-photo img { width: 100%; height: 640px; object-fit: cover; object-position: center; }
+    .info-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      overflow: hidden;
+      margin-top: 44px;
+    }
+    .info-strip div { background: var(--card); padding: 24px; }
+    .info-strip strong { display: block; font-size: 24px; color: var(--accent-dark); margin-bottom: 4px; }
+    .info-strip span { color: var(--muted); font-size: 14px; }
+
+    section { padding: 82px 0; border-top: 1px solid var(--line); }
+    .section-head { display: grid; grid-template-columns: .75fr 1.25fr; gap: 40px; margin-bottom: 42px; }
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 5vw, 60px);
+      line-height: 1;
+      font-weight: 600;
+    }
+    .section-text { color: var(--muted); font-size: 18px; max-width: 690px; }
+
+    .about-grid { display: grid; grid-template-columns: 1fr; gap: 28px; align-items: stretch; }
+    .about-card { background: var(--card); border: 1px solid var(--line); border-radius: 28px; padding: 42px; display: grid; align-content: center; gap: 18px; max-width: 860px; margin: 0 auto; }
+    .about-card p { color: var(--muted); font-size: 17px; }
+
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 26px; padding: 28px; min-height: 180px; }
+    .card .num { color: var(--accent); font-size: 13px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 22px; }
+    .card h3 { font-size: 21px; margin-bottom: 10px; }
+    .card p, .card li { color: var(--muted); }
+    .card ul { list-style: none; display: grid; gap: 10px; }
+
+    .format { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .price { font-family: 'Cormorant Garamond', serif; font-size: 58px; line-height: 1; color: var(--accent-dark); margin: 20px 0 10px; }
+
+    .reviews { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .review { background: var(--card); border: 1px solid var(--line); border-radius: 26px; padding: 28px; }
+    .review p { color: var(--muted); margin-bottom: 18px; }
+    .review strong { color: var(--accent-dark); }
+
+    .contact-box {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      padding: 42px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .contact-links { display: grid; gap: 12px; }
+    .contact-links a {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px 20px;
+      color: var(--accent-dark);
+      background: #fffaf4;
+    }
+    footer { padding: 30px 0; color: var(--muted); font-size: 14px; }
+
+    @media (max-width: 900px) {
+      .menu, .nav > .btn { display: none; }
+      .burger { display: inline-flex; }
+      header { background: rgba(245, 241, 234, 0.94); }
+      .nav { height: 68px; }
+      .logo { font-size: 21px; }
+      .hero-grid, .section-head, .format, .contact-box { grid-template-columns: 1fr; }
+      .hero-photo img { height: 480px; }
+      .cards, .reviews, .info-strip { grid-template-columns: 1fr; }
+      .hero { padding-top: 46px; }
+      section { padding: 58px 0; }
+      .about-card { padding: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <input class="menu-toggle" id="menu-toggle" type="checkbox" aria-label="Открыть меню">
+    <div class="container nav">
+      <a class="logo" href="#top">Дмитрий Путиловский</a>
+      <nav class="menu">
+        <a href="#about">Обо мне</a>
+        <a href="#work">С чем работаю</a>
+        <a href="#format">Консультации</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+      <a class="btn" href="https://t.me/d_putilovskiy" target="_blank">Записаться</a>
+      <label class="burger" for="menu-toggle" aria-label="Открыть меню"><span></span></label>
+    </div>
+    <nav class="mobile-panel" aria-label="Мобильное меню">
+      <a href="#about">Обо мне</a>
+      <a href="#work">С чем работаю</a>
+      <a href="#format">Консультации</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contacts">Контакты</a>
+      <a class="mobile-record" href="https://t.me/d_putilovskiy" target="_blank">Записаться</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Клинический психолог</div>
+          <h1>Путиловский Дмитрий Александрович</h1>
+          <p class="lead">Помогаю справляться с зависимостями, психотравмой, тревогой и сложными жизненными ситуациями. Работаю бережно, конфиденциально и с опорой на профессиональную этику.</p>
+          <div class="hero-actions">
+            <a class="btn" href="https://t.me/d_putilovskiy" target="_blank">Записаться в Telegram</a>
+          </div>
+          <div class="tags">
+            <div class="tag">Специалист по работе с зависимыми формами поведения</div>
+            <div class="tag">Специалист по работе с психотравмой</div>
+            <div class="tag">Индивидуальные консультации очно и онлайн</div>
+          </div>
+        </div>
+        <div class="hero-photo">
+          <img src="images/dmitry-main.jpeg" alt="Путиловский Дмитрий Александрович">
+        </div>
+      </div>
+      <div class="container info-strip">
+        <div><strong>более 5 лет</strong><span>практики психологического консультирования</span></div>
+        <div><strong>60 минут</strong><span>длительность индивидуальной консультации</span></div>
+        <div><strong>6000 ₽</strong><span>стоимость консультации</span></div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <h2>Обо мне</h2>
+          <p class="section-text">Я клинический психолог. В работе соединяю профессиональные знания, опыт помощи людям в кризисных состояниях и бережное отношение к личной истории каждого клиента.</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-card">
+            <p>Имею опыт работы психологом и программным руководителем в реабилитационном центре для зависимых, а также опыт работы в наркологической клинике.</p>
+            <p>Работаю с клиентами с зависимыми формами поведения, психотравмой, тревогой, внутренними конфликтами, сложностями в отношениях и самооценке.</p>
+            <p>В консультациях соблюдаю принципы конфиденциальности, профессиональной этики и индивидуального подхода.</p>
+          </div>
+        </div>
+      </div>
+    <div class="container">
+        <div class="diploma-gallery">
+          <div class="diploma-item">
+            <a href="diplomas/vuz_193138_yy44vzb5b.jpg" target="_blank"><img src="diplomas/vuz_193138_yy44vzb5b.jpg" alt="Диплом бакалавра"></a>
+            <div class="diploma-info">
+              <h3>ОАНО ВО «Московский психолого-социальный университет»</h3>
+              <p>Специальность: Социальная психология</p>
+              <p>Квалификация: Бакалавр</p>
+              <p>Годы обучения: 2021 — 2026</p>
+            </div>
+          </div>
+          <div class="diploma-item">
+            <a href="diplomas/vuz_236461_gcrry74i6.jpg" target="_blank"><img src="diplomas/vuz_236461_gcrry74i6.jpg" alt="Диплом о профессиональной переподготовке"></a>
+            <div class="diploma-info">
+              <h3>ОАНО ВО «Московский психолого-социальный университет»</h3>
+              <p>Программа: Клиническая психология</p>
+              <p>Продолжительность: 1089 часов</p>
+              <p>Год получения: 2024</p>
+            </div>
+          </div>
+          <div class="diploma-item">
+            <a href="diplomas/vuz_sert_455730.jpg" target="_blank"><img src="diplomas/vuz_sert_455730.jpg" alt="Сертификат"></a>
+            <div class="diploma-info">
+              <h3>Психодинамическая соматическая терапия психической травмы</h3>
+              <p>Выдан: АНО ДПО МИПОПП</p>
+              <p>Продолжительность: 350 часов</p>
+              <p>Год получения: 2024</p>
+            </div>
+          </div>
+          <div class="diploma-item">
+            <a href="diplomas/vuz_sert_455736.jpg" target="_blank"><img src="diplomas/vuz_sert_455736.jpg" alt="Сертификат"></a>
+            <div class="diploma-info">
+              <h3>Психологическое консультирование</h3>
+              <p>Выдан: МПЛ 12</p>
+              <p>Продолжительность: 540 часов</p>
+              <p>Год получения: 2021</p>
+            </div>
+          </div>
+          <div class="diploma-item">
+            <a href="diplomas/vuz_sert_455758.jpg" target="_blank"><img src="diplomas/vuz_sert_455758.jpg" alt="Сертификат"></a>
+            <div class="diploma-info">
+              <h3>Работа с зависимостями</h3>
+              <p>Выдан: МПЛ 12</p>
+              <p>Продолжительность: 120 часов</p>
+              <p>Год получения: 2022</p>
+            </div>
+          </div>
+          <div class="diploma-item">
+            <a href="diplomas/vuz_sert_455764.jpg" target="_blank"><img src="diplomas/vuz_sert_455764.jpg" alt="Сертификат"></a>
+            <div class="diploma-info">
+              <h3>Учебно-терапевтическая группа для участников программы «Психодинамическая соматическая терапия психической травмы»</h3>
+              <p>Выдан: АНО ДПО МИПОПП</p>
+              <p>Продолжительность: 32 часа</p>
+              <p>Год получения: 2023</p>
+            </div>
+          </div>
+          <div class="diploma-item">
+            <a href="diplomas/vuz_sert_455765.jpg" target="_blank"><img src="diplomas/vuz_sert_455765.jpg" alt="Сертификат"></a>
+            <div class="diploma-info">
+              <h3>Проведение когнитивно-поведенческого консультирования в работе с зависимыми</h3>
+              <p>Выдан: Школа консультанта по вопросам зависимости</p>
+              <p>Продолжительность: 24 часа</p>
+              <p>Год получения: 2022</p>
+            </div>
+          </div>
+          <div class="diploma-item">
+            <a href="diplomas/vuz_sert_501883.jpg" target="_blank"><img src="diplomas/vuz_sert_501883.jpg" alt="Сертификат"></a>
+            <div class="diploma-info">
+              <h3>Тренинг повышения квалификации по работе с пациентами, употребляющими синтетические наркотики и имеющими расстройство личности</h3>
+              <p>Выдан: Школа консультанта по вопросам зависимости</p>
+              <p>Продолжительность: 24 часа</p>
+              <p>Год получения: 2022</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <style>
+        .diploma-gallery{display:grid;grid-template-columns:1fr;gap:18px;margin-top:28px}
+        .diploma-item{display:grid;grid-template-columns:minmax(120px,220px) 1fr;gap:18px;align-items:start;padding:18px;border:1px solid rgba(30,56,82,.12);border-radius:16px;background:#fff}
+        .diploma-item img{width:100%;height:auto;border-radius:8px;display:block}
+        .diploma-info h3{margin:0 0 10px;font-size:18px;line-height:1.3;color:#1f3348}
+        .diploma-info p{margin:4px 0;color:#2c3c4a}
+        @media (max-width:640px){.diploma-item{grid-template-columns:110px 1fr;gap:12px;padding:12px}.diploma-info h3{font-size:15px}.diploma-info p{font-size:14px}}
+      </style>
+    </section>
+
+    <section id="work">
+      <div class="container">
+        <div class="section-head">
+          <h2>С чем я работаю</h2>
+          <p class="section-text">Консультации помогают разобраться в причинах состояния, увидеть повторяющиеся сценарии и постепенно вернуть себе опору.</p>
+        </div>
+        <div class="cards">
+          <div class="card"><div class="num">01</div><h3>Зависимости</h3><p>Алкогольная, наркотическая и другие зависимые формы поведения, созависимые отношения.</p></div>
+          <div class="card"><div class="num">02</div><h3>Травматический опыт</h3><p>Психотравма, кризисы, тяжёлые переживания, чувство вины, обиды и бессилия.</p></div>
+          <div class="card"><div class="num">03</div><h3>Тревога и стресс</h3><p>Непроходящая тревога, раздражительность, панические состояния, эмоциональное напряжение.</p></div>
+          <div class="card"><div class="num">04</div><h3>Самооценка</h3><p>Неуверенность в себе, самокритика, ощущение неуспешности и внутренние конфликты.</p></div>
+          <div class="card"><div class="num">05</div><h3>Отношения</h3><p>Сложности в паре, одиночество, поиск партнёра, проблемы коммуникации.</p></div>
+          <div class="card"><div class="num">06</div><h3>Жизненные кризисы</h3><p>Поиск выхода из сложной ситуации, изменения, новые цели и восстановление опоры.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="format">
+      <div class="container">
+        <div class="section-head">
+          <h2>Консультации</h2>
+          <p class="section-text">Формат работы подбирается индивидуально. Возможны очные и онлайн-встречи.</p>
+        </div>
+        <div class="format">
+          <div class="card">
+            <div class="num">Формат</div>
+            <h3>Индивидуальная консультация</h3>
+            <p class="price">6000 ₽</p>
+            <p>60 минут · очно или онлайн</p>
+          </div>
+          <div class="card">
+            <div class="num">Формат</div>
+            <h3>Диагностика</h3>
+            <p class="price">15 000 ₽</p>
+            <p>Психологическая диагностика</p>
+          </div>
+          <div class="card">
+            <div class="num">Подход</div>
+            <h3>Бережная глубокая работа</h3>
+            <ul>
+              <li>Конфиденциальность</li>
+              <li>Индивидуальный подход</li>
+              <li>Профессиональная этика</li>
+              <li>Работа без давления и готовых советов</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews">
+      <div class="container">
+        <div class="section-head">
+          <h2>Отзывы</h2>
+          <p class="section-text">Короткие фрагменты отзывов клиентов о работе с Дмитрием Александровичем.</p>
+        </div>
+        <div class="reviews">
+          <div class="review"><p>«С первой минуты создаёт атмосферу абсолютной безопасности. Благодаря работе я научилась справляться с паникой, ставить границы и говорить “нет”.»</p><strong>Евдокия</strong></div>
+          <div class="review"><p>«Обращалась с запросом созависимости и страхом что-то менять. Благодаря Дмитрию начала новую главу своей жизни.»</p><strong>Юлия</strong></div>
+          <div class="review"><p>«Работа продолжается уже более года. Отношения в семье стали спокойнее, появились новые цели и желание двигаться дальше.»</p><strong>Инна</strong></div>
+          <div class="review"><p>«В тяжёлый жизненный период результат превзошёл ожидания: стало больше энергии и появилась внутренняя опора.»</p><strong>Женя</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacts">
+      <div class="container">
+        <div class="contact-box">
+          <div>
+            <div class="eyebrow">Контакты</div>
+            <h2>Записаться на консультацию</h2>
+            <p class="section-text" style="margin-top:22px;">Свяжитесь удобным способом, чтобы обсудить запрос и подобрать формат встречи.</p>
+          </div>
+          <div class="contact-links">
+            <a href="https://t.me/d_putilovskiy" target="_blank">Telegram: @d_putilovskiy</a>
+            <a href="mailto:mail@dputilovskiy.ru">Email: mail@dputilovskiy.ru</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© Путиловский Дмитрий Александрович · Клинический психолог</div>
+  </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileLinks = document.querySelectorAll('.mobile-panel a');
+
+      function syncScrollLock() {
+        document.body.style.overflow = '';
+      }
+
+      menuToggle.addEventListener('change', syncScrollLock);
+
+      mobileLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          menuToggle.checked = false;
+          syncScrollLock();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
